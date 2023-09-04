@@ -1,4 +1,5 @@
-# Modify the following function return a list of all the odd numbers from the input list
+# Modify the following function to return a list of all the odd numbers from the input list.
+# You must use a list comprehension.
 
 def get_list_of_all_odd_numbers(list_of_odd_and_even_numbers):
     # Your code here
