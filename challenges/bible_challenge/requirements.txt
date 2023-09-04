@@ -1,0 +1,24 @@
+You are tasked with creating a python program that reads/parses the data in data.txt. Once you have parsed
+the data you need to implement a program that can answer the following questions:
+    - How many chapters are there in the Bible?
+    - How many verses are there in the Bible?
+    - How many books of the Bible have unknown (human) authors?
+    - How many different known (human) authors are there?
+    - What book of the Bible has the highest average amount of verses per chapter?
+    - What book of the Bible has the average lowest amount of verses per chapter (only consider books with more than 8 chapters)?
+    - How many different categories of Bible books are there?
+        - Which categories are the largest (by verse count)?
+        - Which categories are the smallest (by verse count)?
+    - How many verses and chapters are there in the major prophets?
+    - How many verses and chapters are there in the minor prophets?
+    - What percentage of the Bible did Paul write (based on number of verses Paul wrote out of the whole)?
+    - What percentage of the Bible did Moses write (based on number of verses Moses wrote out of the whole)?
+    - What percentage of the Bible did John write (based on number of verses John wrote out of the whole)?
+
+Your program needs to output each of these questions (and their answers) to a new file called solutions.txt.
+
+Hints:
+    - First step is figuring out read the contents of a txt file
+    - Second step is converting the data in data.txt into python objects you can work with. data.txt is organized
+      such that each line represents info about each book. All lines follow the same structure:
+        - Name, Chapters, Verses, Categories (list), Authors (list)
