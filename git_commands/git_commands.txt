@@ -1,0 +1,8 @@
+git status - shows you the status of your branch
+git branch - lists all the branches in the repo
+git checkout -b branch_name - creates and checks out a new branch named "branch_name"
+git pull origin branch_name - pulls the latest changes for branch_name from origin
+git add . - stages all changes in the repo
+git commit -m "your commit message - commits code changes with a message
+git merge branch_name - IMPORTANT this merges branch_name into the branch you are currently on
+git init . - This will initiate a new git repo in a directory (that doesn't already have one)
