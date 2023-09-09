@@ -49,7 +49,7 @@ def two_sum_short(numbers, target):
 
     return None
 
-# Example naive solution
+# Example naive solution 1
 def two_sum_bad(numbers, target):
     for i in range(len(numbers)):
       number_1 = numbers[i]
@@ -63,7 +63,27 @@ def two_sum_bad(numbers, target):
             return [i,j]
     return None
 
+# Example naive solution 2
+def two_sum_better_but_still_bad(numbers, target):
+    for i in range(len(numbers) - 1):
+      number_1 = numbers[i]
+      for j in range(i + 1, len(numbers)):
+         if i == j:
+            continue
+
+         number_2 = numbers[j]        
+
+         if number_1 + number_2 == target:
+            return [i,j]
+    return None
+
 ################################################### TEST CASES ###################################################
+
+class bcolors:
+   OKGREEN = '\033[92m'
+   FAIL = '\033[91m'
+   ENDC = '\033[0m'
+
 def run_stress_tests(name, two_sum):
    class TimeoutException(Exception): pass
 
@@ -89,9 +109,10 @@ def run_stress_tests(name, two_sum):
       try:
          with time_limit(5):
             passed = stress_test(index + 1, test_case, two_sum)
-            total_passed += 1
+            if passed:
+               total_passed += 1
       except TimeoutException as e:
-         print("  FAILED - Test case {} timed out with an input of {}!".format(index + 1, test_case))
+         print(bcolors.FAIL + "  FAILED" + bcolors.ENDC + " - Test case {} timed out with an input of {}!".format(index + 1, test_case))
 
    return len(test_cases) == total_passed   
 
@@ -111,9 +132,9 @@ def stress_test(number, input_size, two_sum):
 
     print("  Case {} - Testing an input of {} numbers".format(number, input_size))
     if number_1 + number_2 == target:
-       print("     PASSED - Solution found in {} seconds. \n              Found first number: {} at index position: {} and second number: {} at index position: {}. \n              {} + {} = {}".format(elapsed, number_1, solution[0], number_2, solution[1], number_1, number_2, target))
+       print(bcolors.OKGREEN + "     PASSED" + bcolors.ENDC + " - Solution found in {} seconds. \n              Found first number: {} at index position: {} and second number: {} at index position: {}. \n              {} + {} = {}".format(elapsed, number_1, solution[0], number_2, solution[1], number_1, number_2, target))
     else:
-       print("     FAILED - Solution found in {} seconds. \n              Found first number: {} at index position: {} and second number: {} at index position: {}. \n              {} + {} != {}".format(elapsed, number_1, solution[0], number_2, solution[1], number_1, number_2, target))
+       print(bcolors.FAIL + "     FAILED" + bcolors.ENDC + " - Solution found in {} seconds. \n              Found first number: {} at index position: {} and second number: {} at index position: {}. \n              {} + {} != {}".format(elapsed, number_1, solution[0], number_2, solution[1], number_1, number_2, target))
 
     return number_1 + number_2 == target
 
@@ -122,9 +143,9 @@ def run_basic_tests(name, two_sum):
    def basic_test(two_sum, input, target, expected):
     result = two_sum(input, target)
     if result == expected:
-       print("  PASSED - Basic test case. Verified two_sum({}, {}) returned expected: {}".format(input, target, expected))
+       print(bcolors.OKGREEN + "  PASSED" + bcolors.ENDC + " - Basic test case. Verified two_sum({}, {}) returned expected: {}".format(input, target, expected))
     else:
-       print("  FAILED - Basic test case. Expected two_sum({}, {}) to return {} but got: {}".format(input, target, expected, result))
+       print(bcolors.FAIL + "  FAILED" + bcolors.ENDC + " - Basic test case. Expected two_sum({}, {}) to return {} but got: {}".format(input, target, expected, result))
        
     return result == expected
 
@@ -168,11 +189,12 @@ if __name__=='__main__':
       "two_sum_long": two_sum_long,
       "two_sum_short": two_sum_short,
       "two_sum_bad": two_sum_bad,
+      "two_sum_better_but_still_bad": two_sum_better_but_still_bad,
    }
 
    for name, solution in solutions.items():
       print()
-      print("------------------------ Testing {} ------------------------".format(name))
+      print("------------------------------------------------ Testing {} ------------------------------------------------".format(name))
       basic_passed = run_basic_tests(name, solution)
       stress_passed = run_stress_tests(name, solution)
       print()
